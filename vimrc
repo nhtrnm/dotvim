@@ -1,3 +1,6 @@
+" Enable "pathogen.vim"
+execute pathogen#infect()
+
 " Enable syntax highlighting.
 " Note: do not use "syntax on" because it overrules color settings with the defaults.
 syntax enable
