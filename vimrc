@@ -6,6 +6,9 @@ execute pathogen#infect()
 " defaults.
 syntax enable
 
+" Set indentation for specific file types (don't really need it for now).
+filetype plugin indent on
+
 " Set dark background for dark Solarized theme.
 set background=dark
 
@@ -15,16 +18,16 @@ set background=dark
 " Set Solarized theme.
 colorscheme solarized
 
-" Convert tabs to spaces.
+" Convert tabs to Spaces.
 set expandtab
 
-" Set tabs to 4 spaces. 
+" Set tabs to 4 Spaces. 
 set tabstop=4
 
-" Indent with 4 spaces.
+" Indent with 4 Spaces.
 set shiftwidth=4
 
-" "<Tab>" and "<BS>" insert and erase "tabstop" spaces.
+" "<Tab>" and "<BS>" insert and erase "tabstop" Spaces.
 set smarttab
 
 " Copy indent from the current line.
@@ -52,9 +55,6 @@ set colorcolumn=+1
 " Show the line and column number of the cursor position.
 set ruler
 
-" Set indentation for specific file types (don't really need it for now).
-"" filetype indent on
-
 " Set visual autocomplete for command menu.
 set wildmenu
 
@@ -71,12 +71,20 @@ set incsearch
 " Set highlight search.
 set hlsearch
 
-" Map ",<space>" to stopping highlighting old search (will enable when I learn
-" more about key mappings).
-"" nnoremap <leader><space> :nohlsearch<CR>
-
 " Remap "jk" to be "<Esc>" in Insert mode.
 inoremap jk <Esc>
+
+" "<Leader>" is ",".
+" Note: "mapleader" must be defined before any mapping with "<Leader>".
+let mapleader = ","
+
+" Map ",<Space>" to stopping highlighting old search (will enable when I learn
+" more about key mappings).
+nnoremap <Leader><Space> :nohlsearch<CR>
+
+" New way to reach beginning and end of a line.
+nnoremap <Leader>h ^
+nnoremap <Leader>l $
 
 " Remap navigation between splits.
 nnoremap <C-J> <C-W><C-J>
@@ -91,16 +99,20 @@ set splitright
 " Remap ";" to be ":" for simplicity.
 nnoremap ; :
 
-" "<leader>" is ",".
-let mapleader = ","
-
 " Open bash profile file based of the OS.
 let g:os = systemlist("uname")[0]
 if g:os == "Darwin"
-    nnoremap <leader>eb :vsplit ~/.bash_profile<CR>
+    nnoremap <Leader>eb :vsplit ~/.bash_profile<CR>
 elseif g:os == "Linux"
-    nnoremap <leader>eb :vsplit ~/.bashrc<CR>
+    nnoremap <Leader>eb :vsplit ~/.bashrc<CR>
 endif
 
 " Open ".vimrc".
-nnoremap <leader>ev :vsplit $MYVIMRC<CR>
+nnoremap <Leader>ev :vsplit $MYVIMRC<CR>
+
+" Command to YAPF the whole file.
+command! -range=% YAPF :<line1>,<line2>call yapf#YAPF()
+
+" Shortcuts for YAPF-ing selected text.
+map <Leader>f :call yapf#YAPF()<CR>
+imap <Leader>f <C-O>:call yapf#YAPF()<CR>
