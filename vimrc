@@ -1,5 +1,8 @@
-" Enable "pathogen.vim"
+" Enable "pathogen.vim".
 execute pathogen#infect()
+
+" CtrlP configuration.
+set runtimepath^=~/.vim/bundle/ctrlp.vim
 
 " Enable syntax highlighting.
 " Note: do not use "syntax on" because it overrules color settings with the
