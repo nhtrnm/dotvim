@@ -21,10 +21,13 @@ set background=dark
 " Set Solarized theme.
 colorscheme solarized
 
+" Enable mouse use.
+set mouse=a
+
 " Convert tabs to Spaces.
 set expandtab
 
-" Set tabs to 4 Spaces. 
+" Set tabs to 4 Spaces.
 set tabstop=4
 
 " Indent with 4 Spaces.
@@ -42,6 +45,7 @@ set smartindent
 
 " Show line numbers.
 set number
+set relativenumber
 
 " Show partial command in the bottom right corner.
 set showcmd
@@ -74,20 +78,19 @@ set incsearch
 " Set highlight search.
 set hlsearch
 
-" Remap "jk" to be "<Esc>" in Insert mode.
-inoremap jk <Esc>
-
 " "<Leader>" is ",".
 " Note: "mapleader" must be defined before any mapping with "<Leader>".
 let mapleader = ","
 
-" Map ",<Space>" to stopping highlighting old search (will enable when I learn
-" more about key mappings).
-nnoremap <Leader><Space> :nohlsearch<CR>
+inoremap jk <Esc>
+nnoremap ; :
+nnoremap <Space> :nohlsearch<CR>
+nnoremap <Leader>b ^
+nnoremap <Leader>e $
 
-" New way to reach beginning and end of a line.
-nnoremap <Leader>h ^
-nnoremap <Leader>l $
+" Copy/paste OS buffer.
+vnoremap <Leader>c "*y
+nnoremap <Leader>v "*p
 
 " Remap navigation between splits.
 nnoremap <C-J> <C-W><C-J>
@@ -99,19 +102,13 @@ nnoremap <C-H> <C-W><C-H>
 set splitbelow
 set splitright
 
-" Remap ";" to be ":" for simplicity.
-nnoremap ; :
+" Trim whitespace characters on save.
+autocmd BufWritePre *.c,*.cpp,*.cc,*.h,*.py,*.tex :%s/\s\+$//e
 
-" Open bash profile file based of the OS.
-let g:os = systemlist("uname")[0]
-if g:os == "Darwin"
-    nnoremap <Leader>eb :vsplit ~/.bash_profile<CR>
-elseif g:os == "Linux"
-    nnoremap <Leader>eb :vsplit ~/.bashrc<CR>
-endif
+" Add closing brace on "<CR>" automatically.
+inoremap {<CR> {<CR>}<Esc>O
 
-" Open ".vimrc".
-nnoremap <Leader>ev :vsplit $MYVIMRC<CR>
+map <C-N> :NERDTreeToggle<CR>
 
 " Command to YAPF the whole file.
 command! -range=% YAPF :<line1>,<line2>call yapf#YAPF()
