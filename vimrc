@@ -45,7 +45,6 @@ set smartindent
 
 " Show line numbers.
 set number
-set relativenumber
 
 " Show partial command in the bottom right corner.
 set showcmd
@@ -85,12 +84,14 @@ let mapleader = ","
 inoremap jk <Esc>
 nnoremap ; :
 nnoremap <Space> :nohlsearch<CR>
-nnoremap <Leader>b ^
-nnoremap <Leader>e $
+" nnoremap <Leader>b ^
+" nnoremap <Leader>e $
+nnoremap j gj
+nnoremap k gk
 
 " Copy/paste OS buffer.
-vnoremap <Leader>c "*y
-nnoremap <Leader>v "*p
+" vnoremap <Leader>c "*y
+" nnoremap <Leader>v "*p
 
 " Remap navigation between splits.
 nnoremap <C-J> <C-W><C-J>
@@ -103,10 +104,10 @@ set splitbelow
 set splitright
 
 " Trim whitespace characters on save.
-autocmd BufWritePre *.c,*.cpp,*.cc,*.h,*.py,*.tex :%s/\s\+$//e
+autocmd BufWritePre *.c,*.cpp,*.cc,*.h,*.py,*.tex,*.txt :%s/\s\+$//e
 
 " Add closing brace on "<CR>" automatically.
-inoremap {<CR> {<CR>}<Esc>O
+" inoremap {<CR> {<CR>}<Esc>O
 
 map <C-N> :NERDTreeToggle<CR>
 
